@@ -26,6 +26,7 @@ public class Student {
     public void setProgram(String program){
         this.program = program;
     }
+    //display used in discussion not by me
     public void display(){
         System.out.println("Student ID: " + getStudentID());
         System.out.println("Student Name: " + getStudentName());
