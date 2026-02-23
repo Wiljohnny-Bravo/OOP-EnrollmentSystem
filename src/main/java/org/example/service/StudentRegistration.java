@@ -11,6 +11,7 @@ public class StudentRegistration {
 
     //CREATE
     public void saveStudent(Student student){
+        System.out.println("Enter student: ");
         studentList.add(student);
     }
 
@@ -22,11 +23,11 @@ public class StudentRegistration {
     //UPDATE
     public void updateStudent(Student student){
         for (int i = 0; i < studentList.size(); i++){
-            if(studentList.get(i).getStudentName() == (student.getStudentID())){
+            if(studentList.get(i).getStudentID() == (student.getStudentID())){
                 System.out.print("Enter name: ");
                 String name = sc.nextLine();
 
-                System.out.print("Program: ");
+                System.out.print("Enter program: ");
                 String program = sc.nextLine();
 
                 studentList.set(i, student);
@@ -38,9 +39,9 @@ public class StudentRegistration {
     }
 
     //REMOVE
-    public String delete(Student student){
+    public String removeStudent(Student student){
         for(int i = 0; i < studentList.size(); i++){
-            if(studentList.get(i).getStudentID().equals(student.getStudentID())){
+            if(studentList.get(i).getStudentID() == (student.getStudentID())){
                 studentList.remove(i);
                 return "Deleted Successfully";
             }

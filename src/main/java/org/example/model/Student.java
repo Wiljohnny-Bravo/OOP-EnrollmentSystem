@@ -1,28 +1,30 @@
 package org.example.model;
 
 public class Student {
-    private String studentID;
+    private int studentID;
     private String studentName;
     private String program;
 
+    //Constructor Chaining
     public Student(){
-        this(String.valueOf(0));
+        this(0);
     }
-    public Student(String studentID){
+    public Student(int studentID){
         this(studentID, "Unknown");
         this.studentID = studentID;
     }
-    public Student(String studentID, String studentName){
+    public Student(int studentID, String studentName){
+        this(studentID, studentName, "Unkown");
         this.studentID = studentID;
         this.studentName =studentName;
     }
-    public Student(String studentID, String studentName, String program){
+    public Student(int studentID, String studentName, String program){
         this.studentID = studentID;
         this.studentName = studentName;
         this.program = program;
     }
 
-    public String getStudentID(){
+    public int getStudentID(){
         return studentID;
     }
     public String getStudentName(){
@@ -34,7 +36,7 @@ public class Student {
     public void setName(String name){
         this.studentName= name;
     }
-    public void setStudentID(String ID){
+    public void setStudentID(int ID){
         this.studentID = ID;
     }
     public void setProgram(String program){
@@ -48,9 +50,9 @@ public class Student {
     }
     @Override
     public String toString() {
-        return "STUDENT:\n" +
-                "Student ID: " + studentID + "\n" +
-                "Student Name: " + studentName + "\n" +
-                "Program: " + program + "\n";
+        return "STUDENT:" +
+                "Student ID: " + studentID + " || " +
+                "Student Name: " + studentName + " || " +
+                "Program: " + program + "\n ";
     }
 }
