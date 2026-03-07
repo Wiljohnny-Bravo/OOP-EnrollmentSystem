@@ -1,6 +1,6 @@
 package org.example.model;
 
-public class Course {
+public class Course{
     private int courseID;
     private String courseName;
     private String courseProgram;
@@ -27,17 +27,17 @@ public class Course {
     public int getCourseID(){
         return courseID;
     }
+    public void setCourseID(int ID){
+        this.courseID = ID;
+    }
     public String getCourseName(){
         return courseName;
-    }
-    public String getCourseProgram(){
-        return courseProgram;
     }
     public void setCourseName(String name){
         this.courseName = name;
     }
-    public void setCourseID(int ID){
-        this.courseID = ID;
+    public String getCourseProgram(){
+        return courseProgram;
     }
     public void setCourseProgram(String courseProgram){
         this.courseProgram = courseProgram;
