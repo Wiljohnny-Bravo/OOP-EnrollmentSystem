@@ -1,5 +1,6 @@
 package org.example;
 import org.example.model.Course;
+import org.example.model.Instructor;
 import org.example.model.Student;
 import org.example.service.TuitionFeePayment;
 import org.example.service.CourseRegistration;
@@ -13,10 +14,10 @@ public class Main {
     static CourseRegistration courseRegistration = new CourseRegistration();
     static Scanner sc = new Scanner(System.in);
     public static void main(String[] args) {
-        TuitionFeePayment tuitionFeePayment = new TuitionFeePayment();
-        System.out.println(tuitionFeePayment.calculateTuitionFee(3, 0.10));
-        tuitionFeePayment.makePayment(2500);
-        System.out.println(tuitionFeePayment.getRemainingBalance());
+        Student student =  new Student();
+        Instructor instructor =  new Instructor();
+        student.mainTask();
+        instructor.mainTask();
         int choice;
 
         do {
