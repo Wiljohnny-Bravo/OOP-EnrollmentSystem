@@ -7,4 +7,4 @@ asd
 
 Simple enrollment system for OOP practice.
 
-![scan.png](src/main/resources/images/scan.png)
+![Inheritance_Screenshot.png](src/main/resources/images/scan.png)
