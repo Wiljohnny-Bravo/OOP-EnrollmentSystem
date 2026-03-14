@@ -1,6 +1,8 @@
 package org.example;
 import org.example.model.Course;
+import org.example.model.Instructor;
 import org.example.model.Student;
+import org.example.service.TuitionFeePayment;
 import org.example.service.CourseRegistration;
 import org.example.service.StudentRegistration;
 
@@ -12,6 +14,10 @@ public class Main {
     static CourseRegistration courseRegistration = new CourseRegistration();
     static Scanner sc = new Scanner(System.in);
     public static void main(String[] args) {
+        Student student =  new Student();
+        Instructor instructor =  new Instructor();
+        student.mainTask();
+        instructor.mainTask();
         int choice;
 
         do {
@@ -32,6 +38,7 @@ public class Main {
             }
         }while(choice != 3);
     }
+
     public static void displayChoice(){
         System.out.print("===========================================================================================" +
                 "\n[1] Student" +
@@ -39,6 +46,7 @@ public class Main {
                 "\n[3] Exit" +
                 "\nEnter choice: ");
     }
+
     public static void studentSwitch(){
         int choice;
 
@@ -66,6 +74,7 @@ public class Main {
             }
         }while(choice != 5);
     }
+
     public static void courseSwitch(){
         int choice;
         do {
@@ -90,9 +99,10 @@ public class Main {
             }
         }while(choice != 5);
     }
+
     public static void displayCommands(){
         System.out.print("===========================================================================================" +
-                "[\n1] Save Student" +
+                "\n[1] Save Student" +
                 "\n[2] Display Student" +
                 "\n[3] Update Student" +
                 "\n[4] Remove Student" +
@@ -135,6 +145,7 @@ public class Main {
         studentRegistration.removeStudent(new Student(removeStudentID));
         System.out.println("===========================================================================================");
     }
+
     public static void saveCourse(){
         System.out.println("===========================================================================================");
         System.out.print("Enter Course ID: ");

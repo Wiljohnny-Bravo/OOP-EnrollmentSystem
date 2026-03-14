@@ -5,7 +5,7 @@ import org.example.model.Student;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class StudentRegistration {
+public class StudentRegistration extends Student{
     private Scanner sc = new Scanner(System.in);
     private ArrayList<Student> studentList = new ArrayList<>();
 
@@ -23,7 +23,7 @@ public class StudentRegistration {
     //UPDATE
     public void updateStudent(Student student){
         for (int i = 0; i < studentList.size(); i++){
-            if(studentList.get(i).getStudentID() == (student.getStudentID())){
+            if(studentList.get(i).getID() == (student.getID())){
                 System.out.print("Enter name: ");
                 String name = sc.nextLine();
 
@@ -32,7 +32,7 @@ public class StudentRegistration {
 
                 studentList.set(i, student);
 
-                studentList.set(i, new Student(student.getStudentID(), name, program));
+                studentList.set(i, new Student(student.getID(), name, program));
                 break;
             }
         }
@@ -41,7 +41,7 @@ public class StudentRegistration {
     //REMOVE
     public String removeStudent(Student student){
         for(int i = 0; i < studentList.size(); i++){
-            if(studentList.get(i).getStudentID() == (student.getStudentID())){
+            if(studentList.get(i).getID() == (student.getID())){
                 studentList.remove(i);
                 return "Deleted Successfully";
             }
