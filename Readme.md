@@ -2,7 +2,8 @@
 
 ---
 **Author: Wiljohn Lingao**
-asd
+
+
 **1. Description**
 
 Simple enrollment system for OOP practice.
