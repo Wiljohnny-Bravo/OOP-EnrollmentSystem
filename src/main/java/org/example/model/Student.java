@@ -36,7 +36,7 @@ public class Student extends Person{
         System.out.println("Program: " + getProgram());
     }
     @Override
-    public String toString() {
+    public String toString()     {
         return "STUDENT:" +
                 "Student ID: " + super.getID() + " || " +
                 "Student Name: " + super.getName() + " || " +
