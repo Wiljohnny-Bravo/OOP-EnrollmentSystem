@@ -1,6 +1,8 @@
 # Enrollment System
 
 ---
+# Inheritance
+---
 **Author: Wiljohn Lingao**
 
 
