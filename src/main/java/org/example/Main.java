@@ -1,6 +1,8 @@
 package org.example;
 import org.example.model.Course;
+import org.example.model.Instructor;
 import org.example.model.Student;
+import org.example.service.TuitionFeePayment;
 import org.example.service.CourseRegistration;
 import org.example.service.StudentRegistration;
 
@@ -12,6 +14,10 @@ public class Main {
     static CourseRegistration courseRegistration = new CourseRegistration();
     static Scanner sc = new Scanner(System.in);
     public static void main(String[] args) {
+        Student student =  new Student();
+        Instructor instructor =  new Instructor();
+        student.mainTask();
+        instructor.mainTask();
         int choice;
 
         do {
