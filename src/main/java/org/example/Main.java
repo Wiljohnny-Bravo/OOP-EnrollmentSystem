@@ -2,22 +2,25 @@ package org.example;
 import org.example.model.Course;
 import org.example.model.Instructor;
 import org.example.model.Student;
-import org.example.service.TuitionFeePayment;
-import org.example.service.CourseRegistration;
-import org.example.service.StudentRegistration;
+import org.example.service.CourseRegistrationImpl;
+import org.example.service.Registrar;
+import org.example.service.StudentRegistrationImpl;
 
 import java.util.Scanner;
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
-    static StudentRegistration studentRegistration = new StudentRegistration();
-    static CourseRegistration courseRegistration = new CourseRegistration();
+    static StudentRegistrationImpl studentRegistration = new StudentRegistrationImpl();
+    static CourseRegistrationImpl courseRegistration = new CourseRegistrationImpl();
+    static Registrar registrar = new Registrar(studentRegistration, courseRegistration);
+
     static Scanner sc = new Scanner(System.in);
     public static void main(String[] args) {
         Student student =  new Student();
         Instructor instructor =  new Instructor();
         student.mainTask();
         instructor.mainTask();
+
         int choice;
 
         do {
@@ -51,7 +54,7 @@ public class Main {
         int choice;
 
         do {
-            displayCommands();
+            displayStudentCommands();
             choice = sc.nextInt();
             sc.nextLine();
             System.out.println("===========================================================================================");
@@ -60,7 +63,7 @@ public class Main {
                     saveStudent();
                     break;
                 case 2:
-                    studentRegistration.displayALl();
+                    registrar.displayAllStudent();
                     break;
                 case 3:
                     updateStudent();
@@ -78,7 +81,7 @@ public class Main {
     public static void courseSwitch(){
         int choice;
         do {
-            displayCommands();
+            displayCourseCommands();
             choice = sc.nextInt();
             System.out.println("===========================================================================================");
             switch(choice){
@@ -86,7 +89,7 @@ public class Main {
                     saveCourse();
                     break;
                 case 2:
-                    courseRegistration.displayAll();
+                    registrar.displayAllCourse();
                     break;
                 case 3:
                     updateCourse();
@@ -100,12 +103,21 @@ public class Main {
         }while(choice != 5);
     }
 
-    public static void displayCommands(){
+    public static void displayStudentCommands(){
         System.out.print("===========================================================================================" +
                 "\n[1] Save Student" +
                 "\n[2] Display Student" +
                 "\n[3] Update Student" +
                 "\n[4] Remove Student" +
+                "\n[5] Exit" +
+                "\nEnter Command: ");
+    }
+    public static void displayCourseCommands(){
+        System.out.print("===========================================================================================" +
+                "\n[1] Save Course" +
+                "\n[2] Display Course" +
+                "\n[3] Update Course" +
+                "\n[4] Remove Course" +
                 "\n[5] Exit" +
                 "\nEnter Command: ");
     }
@@ -123,7 +135,7 @@ public class Main {
         String sProgram = sc.nextLine();
 
         Student newStudent = new Student(sID, sName, sProgram);
-        studentRegistration.saveStudent(newStudent);
+        registrar.saveStudent(newStudent);
         System.out.println("Student Saved!");
         System.out.println("===========================================================================================");
     }
@@ -133,7 +145,7 @@ public class Main {
         System.out.print("Enter Student ID to update:");
         int updateStudentID = sc.nextInt();
 
-        studentRegistration.updateStudent(new Student(updateStudentID));
+        registrar.updateStudent(new Student(updateStudentID));
         System.out.println("===========================================================================================");
     }
 
@@ -142,7 +154,7 @@ public class Main {
         System.out.print("Enter Student ID to remove:");
         int removeStudentID = sc.nextInt();
 
-        studentRegistration.removeStudent(new Student(removeStudentID));
+        registrar.removeStudent(new Student(removeStudentID));
         System.out.println("===========================================================================================");
     }
 
@@ -159,7 +171,7 @@ public class Main {
         String cProgram = sc.nextLine();
 
         Course newCourse = new Course(cID, cName, cProgram);
-        courseRegistration.saveCourse(newCourse);
+        registrar.saveCourse(newCourse);
         System.out.println("===========================================================================================");
     }
 
@@ -167,7 +179,7 @@ public class Main {
         System.out.println("===========================================================================================");
         System.out.print("Enter Student ID to update: ");
         int updateCourseID = sc.nextInt();
-        courseRegistration.updateCourse(new Course(updateCourseID));
+        registrar.updateCourse(new Course(updateCourseID));
         System.out.println("===========================================================================================");
     }
 
@@ -175,7 +187,7 @@ public class Main {
         System.out.println("===========================================================================================");
         System.out.print("Enter Student ID to update: ");
         int removeCourseID = sc.nextInt();
-        courseRegistration.updateCourse(new Course(removeCourseID));
+        registrar.updateCourse(new Course(removeCourseID));
         System.out.println("===========================================================================================");
     }
 }
