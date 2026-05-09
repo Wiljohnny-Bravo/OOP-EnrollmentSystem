@@ -32,14 +32,14 @@ public class Student extends Person{
     //display used in discussion not by me
     public void display(){
         System.out.println("Student ID: " + getID());
-        System.out.println("Student Name: " + getName());
+        System.out.println("Student Name: " + getPersonName());
         System.out.println("Program: " + getProgram());
     }
     @Override
     public String toString()     {
         return "STUDENT:" +
                 "Student ID: " + super.getID() + " || " +
-                "Student Name: " + super.getName() + " || " +
+                "Student Name: " + super.getPersonName() + " || " +
                 "Program: " + program + "\n ";
     }
 }

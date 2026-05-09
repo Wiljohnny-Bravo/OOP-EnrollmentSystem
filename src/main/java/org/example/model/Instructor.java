@@ -1,7 +1,5 @@
 package org.example.model;
 
-import java.util.ArrayList;
-
 public class Instructor extends Person{
 //    private ArrayList<Course> course = new ArrayList<>();
     private String course;
@@ -26,7 +24,7 @@ public class Instructor extends Person{
     public String toString() {
         return "INSTRUCTOR:" +
                 "Instructor ID: " + super.getID() + " || " +
-                "Instructor Name: " + super.getName() + " || " +
+                "Instructor Name: " + super.getPersonName() + " || " +
                 "Course: " + course + "\n ";
     }
 
