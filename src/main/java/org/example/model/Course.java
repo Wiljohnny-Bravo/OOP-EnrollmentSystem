@@ -11,12 +11,10 @@ public class Course{
     }
     public Course(int courseID){
         this(courseID, "Unkown");
-        this.courseID = courseID;
     }
     public Course(int courseID, String courseName){
         this(courseID, courseName, "Unknown");
-        this.courseID = courseID;
-        this.courseName = courseName;
+
     }
     public Course(int courseID, String courseName, String courseProgram){
         this.courseID = courseID;

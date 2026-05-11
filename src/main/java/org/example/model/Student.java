@@ -2,6 +2,7 @@ package org.example.model;
 
 public class Student extends Person{
     private String program;
+    private Section section;
 
     //Constructor Chaining
     public Student(){
@@ -26,20 +27,30 @@ public class Student extends Person{
     public String getProgram(){
         return program;
     }
+
     public void setProgram(String program){
         this.program = program;
     }
+
+    public void setSection(Section section) {
+        this.section = section;
+    }
+
+    public Section getSection() {
+        return section;
+    }
+
     //display used in discussion not by me
     public void display(){
         System.out.println("Student ID: " + getID());
-        System.out.println("Student Name: " + getName());
+        System.out.println("Student Name: " + getPersonName());
         System.out.println("Program: " + getProgram());
     }
     @Override
     public String toString()     {
         return "STUDENT:" +
-                "Student ID: " + super.getID() + " || " +
-                "Student Name: " + super.getName() + " || " +
-                "Program: " + program + "\n ";
+                "Student ID: " + getID() + " || " +
+                "Student Name: " + getPersonName() + " || " +
+                "Program: " + getProgram() + "\n ";
     }
 }

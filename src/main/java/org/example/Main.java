@@ -1,18 +1,21 @@
 package org.example;
 import org.example.model.Course;
 import org.example.model.Instructor;
+import org.example.model.Section;
 import org.example.model.Student;
-import org.example.service.CourseRegistrationImpl;
-import org.example.service.Registrar;
-import org.example.service.StudentRegistrationImpl;
+import org.example.service.*;
 
 import java.util.Scanner;
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
-    static StudentRegistrationImpl studentRegistration = new StudentRegistrationImpl();
-    static CourseRegistrationImpl courseRegistration = new CourseRegistrationImpl();
-    static Registrar registrar = new Registrar(studentRegistration, courseRegistration);
+    static IStudentServiceImpl studentReg = new IStudentServiceImpl();
+    static ICourseServiceImpl courseReg = new ICourseServiceImpl();
+    static IInstructorServiceImpl instructorReg = new IInstructorServiceImpl();
+    static DepartmentRegistrationImpl deptReg = new DepartmentRegistrationImpl();
+    static IEnrollmentService enrollService = new IEnrollmentServiceImpl();
+
+    static Registrar registrar = new Registrar(studentReg, courseReg, instructorReg, deptReg, enrollService);
 
     static Scanner sc = new Scanner(System.in);
     public static void main(String[] args) {
@@ -36,17 +39,29 @@ public class Main {
                     courseSwitch();
                     break;
                 case 3:
+                    enrollStuToSec();
+                    break;
+                case 4:
+                    assignInstToSec();
+                    break;
+                case 5:
+                    viewHierarchy();
+                    break;
+                case 0:
                     System.out.println("Exiting.....");
                     break;
             }
-        }while(choice != 3);
+        }while(choice != 0);
     }
 
     public static void displayChoice(){
         System.out.print("===========================================================================================" +
-                "\n[1] Student" +
-                "\n[2] Course" +
-                "\n[3] Exit" +
+                "\n[1] Student Management" +
+                "\n[2] Course Management" +
+                "\n[3] Enroll Student to Section" +
+                "\n[4] Assign Instructor to Section" +
+                "\n[5] View University Hierarchy" +
+                "\n[0] Exit" +
                 "\nEnter choice: ");
     }
 
@@ -100,7 +115,49 @@ public class Main {
                 case 5:
                     break;
             }
-        }while(choice != 5);
+        }while(choice != 7);
+    }
+
+    public static void enrollStuToSec(){
+            System.out.print("Enter Student ID: ");
+            int enrollStuID = sc.nextInt();
+            sc.nextLine();
+
+            System.out.print("Enter Section ID: ");
+            int enrollSecID = sc.nextInt();
+            sc.nextLine();
+
+            System.out.print("Enter Section Name: ");
+            String enrollSecName = sc.nextLine();
+
+            Student stuToEnroll = new Student(enrollStuID);
+            Section secToEnroll = new Section(enrollSecID, enrollSecName);
+
+            registrar.enrollStudent(stuToEnroll, secToEnroll);
+    }
+
+    public static void assignInstToSec() {
+        System.out.println("==================== ASSIGN INSTRUCTOR TO SECTION ====================");
+        System.out.print("Enter Instructor ID: ");
+        int instID = sc.nextInt();
+        sc.nextLine();
+
+        System.out.print("Enter Section ID: ");
+        int secID = sc.nextInt();
+        sc.nextLine();
+
+        System.out.print("Enter Section Name: ");
+        String secName = sc.nextLine();
+
+        Instructor inst = new Instructor(instID);
+        Section sec = new Section(secID, secName);
+
+        registrar.assignInstructorToSection(inst, sec);
+        System.out.println("======================================================================");
+    }
+
+    public static void viewHierarchy(){
+        registrar.showHierarchy(deptReg.getDepartmentList());
     }
 
     public static void displayStudentCommands(){
@@ -112,6 +169,7 @@ public class Main {
                 "\n[5] Exit" +
                 "\nEnter Command: ");
     }
+
     public static void displayCourseCommands(){
         System.out.print("===========================================================================================" +
                 "\n[1] Save Course" +
@@ -177,16 +235,20 @@ public class Main {
 
     public static void updateCourse(){
         System.out.println("===========================================================================================");
-        System.out.print("Enter Student ID to update: ");
+        System.out.print("Enter Course ID to update: ");
         int updateCourseID = sc.nextInt();
+        sc.nextLine();
+
         registrar.updateCourse(new Course(updateCourseID));
         System.out.println("===========================================================================================");
     }
 
     public static void removeCourse(){
         System.out.println("===========================================================================================");
-        System.out.print("Enter Student ID to update: ");
+        System.out.print("Enter Course ID to update: ");
         int removeCourseID = sc.nextInt();
+        sc.nextLine();
+
         registrar.updateCourse(new Course(removeCourseID));
         System.out.println("===========================================================================================");
     }

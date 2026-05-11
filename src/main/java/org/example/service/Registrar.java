@@ -1,46 +1,69 @@
 package org.example.service;
 
-import org.example.model.Course;
-import org.example.model.Student;
+import org.example.model.*;
+
+import java.util.List;
 
 public class Registrar {
-    private StudentRegistration studentReg;
-    private CourseRegistration courseReg;
+    private IStudentService studentServ;
+    private ICourseService courseServ;
+    private IInstructorService instructorServ;
+    private DepartmentRegistration departmentServ;
+    private IEnrollmentService enrollmentServ;
 
+    public Registrar(IStudentService studentServ, ICourseService courseServ, IInstructorService instructorServ,
+                     DepartmentRegistration departmentServ, IEnrollmentService enrollmentServ){
+        this.studentServ = studentServ;
+        this.courseServ = courseServ;
+        this.instructorServ = instructorServ;
+        this.departmentServ = departmentServ;
+        this.enrollmentServ = enrollmentServ;
+    }
+    public void enrollStudent(Student student, Section section){
+        enrollmentServ.enrollStudentInSection(student, section);
+    }
 
-    public Registrar(StudentRegistration registration, CourseRegistration courseReg){
-        this.studentReg = registration;
-        this.courseReg = courseReg;
+    public void showHierarchy(List<Department> department){
+        enrollmentServ.viewDepartmentHierarchy(department);
+    }
+
+    public void assignInstructorToSection(Instructor instructor, Section section) {
+        instructorServ.assignToSection(instructor, section);
+    }
+
+    public String saveDepartment(Department department){
+        departmentServ.addDepartment(department);
+        return "Success";
     }
     public String saveCourse(Course course){
-        courseReg.saveCourse(course);
+        courseServ.addCourse(course);
         return "Success";
     }
 
     public String saveStudent(Student student){
-        studentReg.saveStudent(student);
+        studentServ.addStudent(student);
         return "Success";
     }
     public void displayAllStudent(){
-        studentReg.displayAllStudent();
+        studentServ.displayAllStudent();
     }
 
     public void displayAllCourse(){
-        courseReg.displayAllCourse();
+        courseServ.displayAllCourse();
     }
 
     public void updateStudent(Student student){
-        studentReg.updateStudent(student);
+        studentServ.updateStudent(student);
     }
     public void updateCourse(Course course){
-        courseReg.updateCourse(course);
+        courseServ.updateCourse(course);
     }
 
     public void removeStudent(Student student){
-        studentReg.removeStudent(student);
+        studentServ.removeStudent(student);
     }
     public void removeCourse(Course course){
-        courseReg.removeCourse();
+        courseServ.removeCourse(course);
     }
 
 }
