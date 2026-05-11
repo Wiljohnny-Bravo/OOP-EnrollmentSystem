@@ -1,7 +1,6 @@
 package org.example.service;
 
 import org.example.model.*;
-
 import java.util.List;
 
 public class Registrar {
@@ -10,60 +9,44 @@ public class Registrar {
     private IInstructorService instructorServ;
     private DepartmentRegistration departmentServ;
     private IEnrollmentService enrollmentServ;
+    private TuitionService tuitionServ;
 
     public Registrar(IStudentService studentServ, ICourseService courseServ, IInstructorService instructorServ,
-                     DepartmentRegistration departmentServ, IEnrollmentService enrollmentServ){
+                     DepartmentRegistration departmentServ, IEnrollmentService enrollmentServ,
+                     TuitionService tuitionServ) {
         this.studentServ = studentServ;
         this.courseServ = courseServ;
         this.instructorServ = instructorServ;
         this.departmentServ = departmentServ;
         this.enrollmentServ = enrollmentServ;
+        this.tuitionServ = tuitionServ;
     }
-    public void enrollStudent(Student student, Section section){
+
+    public void enrollStudent(Student student, Section section) throws SectionFullException {
         enrollmentServ.enrollStudentInSection(student, section);
     }
 
-    public void showHierarchy(List<Department> department){
-        enrollmentServ.viewDepartmentHierarchy(department);
+    public void showHierarchy(List<Department> departments) {
+        enrollmentServ.viewDepartmentHierarchy(departments);
     }
 
     public void assignInstructorToSection(Instructor instructor, Section section) {
         instructorServ.assignToSection(instructor, section);
     }
 
-    public String saveDepartment(Department department){
+    public void saveDepartment(Department department) {
         departmentServ.addDepartment(department);
-        return "Success";
-    }
-    public String saveCourse(Course course){
-        courseServ.addCourse(course);
-        return "Success";
     }
 
-    public String saveStudent(Student student){
+    public void saveStudent(Student student) {
         studentServ.addStudent(student);
-        return "Success";
-    }
-    public void displayAllStudent(){
-        studentServ.displayAllStudent();
     }
 
-    public void displayAllCourse(){
-        courseServ.displayAllCourse();
+    public void saveInstructor(Instructor instructor) {
+        instructorServ.addInstructor(instructor);
     }
 
-    public void updateStudent(Student student){
-        studentServ.updateStudent(student);
+    public void saveCourse(Course course) {
+        courseServ.addCourse(course);
     }
-    public void updateCourse(Course course){
-        courseServ.updateCourse(course);
-    }
-
-    public void removeStudent(Student student){
-        studentServ.removeStudent(student);
-    }
-    public void removeCourse(Course course){
-        courseServ.removeCourse(course);
-    }
-
 }
