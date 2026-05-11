@@ -3,6 +3,7 @@ package org.example.service;
 import org.example.model.Student;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class IStudentServiceImpl implements IStudentService {
@@ -55,5 +56,10 @@ public class IStudentServiceImpl implements IStudentService {
 
     public ArrayList<Student> getStudentList() {
         return this.studentList;
+    }
+
+    @Override
+    public List<Student> getAllStudents() {
+        return studentList;
     }
 }

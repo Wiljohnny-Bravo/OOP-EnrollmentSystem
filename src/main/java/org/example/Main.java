@@ -140,7 +140,7 @@ public class Main {
         System.out.println("==================== ASSIGN INSTRUCTOR TO SECTION ====================");
         System.out.print("Enter Instructor ID: ");
         int instID = sc.nextInt();
-        sc.nextLine(); // Consume newline
+        sc.nextLine();
 
         System.out.print("Enter Section ID: ");
         int secID = sc.nextInt();
@@ -149,11 +149,9 @@ public class Main {
         System.out.print("Enter Section Name: ");
         String secName = sc.nextLine();
 
-        // 1. Create temporary objects with the provided IDs
         Instructor inst = new Instructor(instID);
         Section sec = new Section(secID, secName);
 
-        // 2. Call the new wrapper method in Registrar
         registrar.assignInstructorToSection(inst, sec);
         System.out.println("======================================================================");
     }

@@ -3,6 +3,7 @@ package org.example.service;
 import org.example.model.Course;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 public class ICourseServiceImpl implements ICourseService {
     private Scanner sc = new Scanner(System.in);
@@ -10,7 +11,7 @@ public class ICourseServiceImpl implements ICourseService {
 
     //CREATE
     @Override
-    public void saveCourse(Course course){
+    public void addCourse(Course course){
         courseList.add(course);
     }
 
@@ -38,12 +39,8 @@ public class ICourseServiceImpl implements ICourseService {
             }
         }
     }
-
+    //DELETE
     @Override
-    public String removeCourse() {
-        return "";
-    }
-
     public String removeCourse(Course course){
         for(int i = 0; i < courseList.size(); i++){
             if(courseList.get(i).getCourseID() == (course.getCourseID())){
@@ -52,5 +49,10 @@ public class ICourseServiceImpl implements ICourseService {
             }
         }
         return "Error Found.";
+    }
+
+    @Override
+    public List<Course> getAllCourses() {
+        return courseList;
     }
 }

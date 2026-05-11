@@ -5,7 +5,7 @@ import org.example.model.Department;
 import java.util.List;
 
 public interface DepartmentRegistration {
-    void saveDepartment(Department department);
+    void addDepartment(Department department);
     void displayDepartment(Department department);
     void updateDepartment(Department department);
     String removeDepartment();

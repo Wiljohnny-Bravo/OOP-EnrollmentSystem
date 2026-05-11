@@ -32,11 +32,11 @@ public class Registrar {
     }
 
     public String saveDepartment(Department department){
-        departmentServ.saveDepartment(department);
+        departmentServ.addDepartment(department);
         return "Success";
     }
     public String saveCourse(Course course){
-        courseServ.saveCourse(course);
+        courseServ.addCourse(course);
         return "Success";
     }
 
@@ -63,7 +63,7 @@ public class Registrar {
         studentServ.removeStudent(student);
     }
     public void removeCourse(Course course){
-        courseServ.removeCourse();
+        courseServ.removeCourse(course);
     }
 
 }

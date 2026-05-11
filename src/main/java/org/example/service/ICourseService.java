@@ -2,9 +2,13 @@ package org.example.service;
 
 import org.example.model.Course;
 
+import java.util.List;
+
 public interface ICourseService {
-    void saveCourse(Course course);
+    void addCourse(Course course);
     void displayAllCourse();
     void updateCourse(Course course);
-    String removeCourse();
+    String removeCourse(Course course);
+    List<Course> getAllCourses();
+
 }

@@ -13,7 +13,7 @@ public class DepartmentRegistrationImpl implements DepartmentRegistration{
     private List<Instructor> instructorList;
 
     @Override
-    public void saveDepartment(Department department) {
+    public void addDepartment(Department department) {
         System.out.print("Enter department name: ");
         departmentList.add(department);
     }

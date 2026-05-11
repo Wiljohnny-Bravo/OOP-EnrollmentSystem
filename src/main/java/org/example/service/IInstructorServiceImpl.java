@@ -4,6 +4,7 @@ import org.example.model.Instructor;
 import org.example.model.Section;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class IInstructorServiceImpl implements IInstructorService {
@@ -32,6 +33,11 @@ public class IInstructorServiceImpl implements IInstructorService {
         if(!found){
             System.out.println("Error: Instructor ID " + instructor.getID() + " not found.");
         }
+    }
+
+    @Override
+    public List<Instructor> getAllInstructors() {
+        return instructorList;
     }
 
     @Override
