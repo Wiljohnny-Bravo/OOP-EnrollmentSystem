@@ -31,4 +31,8 @@ public class Department {
     public void setDepartmentInstructor(List instructorList){
         this.getDepartmentInstructor();
     }
+
+    public List<Instructor> getInstructorList() {
+    return instructorList;
+    }
 }

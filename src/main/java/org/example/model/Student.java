@@ -1,7 +1,10 @@
 package org.example.model;
 
+import java.util.ArrayList;
+
 public class Student extends Person{
     private String program;
+    private Section section;
 
     //Constructor Chaining
     public Student(){
@@ -26,9 +29,19 @@ public class Student extends Person{
     public String getProgram(){
         return program;
     }
+
     public void setProgram(String program){
         this.program = program;
     }
+
+    public void setSection(Section section) {
+        this.section = section;
+    }
+
+    public Section getSection() {
+        return section;
+    }
+
     //display used in discussion not by me
     public void display(){
         System.out.println("Student ID: " + getID());

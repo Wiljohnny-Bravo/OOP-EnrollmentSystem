@@ -1,13 +1,16 @@
 package org.example.service;
 
 import org.example.model.Department;
+import org.example.model.Instructor;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class DepartmentRegistrationImpl implements DepartmentRegistration{
     private Scanner sc = new Scanner(System.in);
     private ArrayList<Department> departmentList = new ArrayList<>();
+    private List<Instructor> instructorList;
 
     @Override
     public void saveDepartment(Department department) {
@@ -20,21 +23,26 @@ public class DepartmentRegistrationImpl implements DepartmentRegistration{
         System.out.println(departmentList);
     }
 
+    public void setInstructorList(List<Instructor> instructorList) {
+        this.instructorList = instructorList;
+    }
+
+    public List<Instructor> getInstructorList() {
+        return instructorList;
+    }
+
     @Override
     public void updateDepartment(Department department) {
         for (int i =  0; i < departmentList.size(); i++){
             if(departmentList.get(i).getDepartmentID() == (department.getDepartmentID())){
-                System.out.print("Enter department name: ");
-                String name = sc.next();
+                System.out.print("Enter new Department Name: ");
+                String newName = sc.nextLine();
 
-                System.out.println("Enter instructor name: ");
-                String instructor = sc.next();
+                List<Instructor> existingInstructors = departmentList.get(i).getInstructorList();
 
+                departmentList.set(i, new Department(department.getDepartmentID(), newName, existingInstructors));
 
-                
-                departmentList.set(i, department);
-
-//                departmentList.set(i, new Department(department.getDepartmentID(), name, instructor));
+                System.out.println("Department updated successfully.");
                 break;
             }
         }
@@ -42,7 +50,17 @@ public class DepartmentRegistrationImpl implements DepartmentRegistration{
 
     @Override
     public String removeDepartment() {
-        return "";
+        System.out.print("Enter Department ID to remove: ");
+        int idToRemove = sc.nextInt();
+        sc.nextLine();
+
+        for (int i = 0; i < departmentList.size(); i++) {
+            if (departmentList.get(i).getDepartmentID() == idToRemove) {
+                departmentList.remove(i);
+                return "Department " + idToRemove + " removed successfully.";
+            }
+        }
+        return "Error: Department ID not found.";
     }
 
 //    CREATE
