@@ -62,4 +62,12 @@ public class IStudentServiceImpl implements IStudentService {
     public List<Student> getAllStudents() {
         return studentList;
     }
+
+    @Override
+    public Student getStudentById(int id) {
+        for (Student s : studentList) {
+            if (s.getID() == id) return s;
+        }
+        return null; // Handle this in Main
+    }
 }

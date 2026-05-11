@@ -1,38 +1,56 @@
 package org.example.service;
 
-import org.example.model.Department;
-import org.example.model.Instructor;
-import org.example.model.Section;
-import org.example.model.Student;
-
+import org.example.model.*;
 import java.util.List;
 
 public class IEnrollmentServiceImpl implements IEnrollmentService {
 
-    public void enrollStudentInSection(Student student, Section section) {
+    @Override
+    public void enrollStudentInSection(Student student, Section section) throws SectionFullException {
+        // Validation: Check if the section has reached its limit
+        if (section.isFull()) {
+            throw new SectionFullException("Enrollment failed: Section " + section.getSectionName() + " is full.");
+        }
+
+        // Maintain the relationship: add student to section's internal list
+        section.getEnrolledStudents().add(student);
+        // Link the section to the student
         student.setSection(section);
-        System.out.println("Student " + student.getPersonName() +
-                " successfully enrolled in " + section.getSectionName());
+
+        System.out.println("Status: Student " + student.getPersonName() + " successfully enrolled in " + section.getSectionName());
     }
 
     @Override
     public void viewDepartmentHierarchy(List<Department> departments) {
-        System.out.println("\n========== UNIVERSITY HIERARCHY ==========");
+        if (departments.isEmpty()) {
+            System.out.println("Notice: No departments found in the system.");
+            return;
+        }
+
+        System.out.println("\n----------------- UNIVERSITY HIERARCHY -----------------");
         for (Department dept : departments) {
-            System.out.println("Department: " + dept.getDepartmentName());
+            System.out.println("Department: " + dept.getDepartmentName() + " (ID: " + dept.getDepartmentID() + ")");
 
-            // Note: Ensure Department.java provides access to the actual List<Instructor>
-            for (Instructor ins : dept.getInstructorList()) {
-                System.out.print("  └── Instructor: " + ins.getPersonName());
+            if (dept.getSectionList().isEmpty()) {
+                System.out.println("   [No sections registered]");
+            }
 
-                // Show the section the instructor is handling
-                if (ins.getSection() != null) {
-                    System.out.println(" (Handling Section: " + ins.getSection().getSectionName() + ")");
+            for (Section sec : dept.getSectionList()) {
+                System.out.println("   Section: " + sec.getSectionName() + " (Capacity: " + sec.getEnrolledStudents().size() + "/35)");
+
+                Instructor ins = sec.getInstructor();
+                System.out.println("      Instructor: " + (ins != null ? ins.getPersonName() : "To be assigned"));
+
+                System.out.println("      Enrolled Students:");
+                if (sec.getEnrolledStudents().isEmpty()) {
+                    System.out.println("         - None");
                 } else {
-                    System.out.println(" (No Section Assigned)");
+                    for (Student s : sec.getEnrolledStudents()) {
+                        System.out.println("         - [ID: " + s.getID() + "] " + s.getPersonName());
+                    }
                 }
             }
         }
-        System.out.println("==========================================\n");
+        System.out.println("--------------------------------------------------------\n");
     }
 }
