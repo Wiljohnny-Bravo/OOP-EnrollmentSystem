@@ -2,17 +2,14 @@ package org.example.service;
 
 import org.example.model.Course;
 import org.example.model.Department;
-import org.example.model.Instructor;
 import org.example.model.Student;
 
-import java.util.List;
-
 public class Registrar {
-    private StudentRegistration studentReg;
-    private CourseRegistration courseReg;
+    private IStudentService studentReg;
+    private ICourseService courseReg;
     private DepartmentRegistration departmentReg;
 
-    public Registrar(StudentRegistration registration, CourseRegistration courseReg){
+    public Registrar(IStudentService registration, ICourseService courseReg){
         this.studentReg = registration;
         this.courseReg = courseReg;
     }
@@ -27,7 +24,7 @@ public class Registrar {
     }
 
     public String saveStudent(Student student){
-        studentReg.saveStudent(student);
+        studentReg.addStudent(student);
         return "Success";
     }
     public void displayAllStudent(){

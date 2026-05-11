@@ -5,13 +5,13 @@ import org.example.model.Student;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class StudentRegistrationImpl implements StudentRegistration {
+public class IStudentServiceImpl implements IStudentService {
     private Scanner sc = new Scanner(System.in);
     private ArrayList<Student> studentList = new ArrayList<>();
 
     //CREATE
     @Override
-    public void saveStudent(Student student){
+    public void addStudent(Student student){
         System.out.println("Enter student: ");
         studentList.add(student);
     }
@@ -22,7 +22,7 @@ public class StudentRegistrationImpl implements StudentRegistration {
         System.out.println(studentList);
     }
 
-    //
+    //UPDATE
     @Override
     public void updateStudent(Student student){
         for (int i = 0; i < studentList.size(); i++){

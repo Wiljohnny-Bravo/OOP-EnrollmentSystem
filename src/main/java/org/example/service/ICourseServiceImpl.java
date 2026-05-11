@@ -4,7 +4,7 @@ import org.example.model.Course;
 
 import java.util.ArrayList;
 import java.util.Scanner;
-public class CourseRegistrationImpl implements CourseRegistration{
+public class ICourseServiceImpl implements ICourseService {
     private Scanner sc = new Scanner(System.in);
     private ArrayList<Course> courseList = new ArrayList<>();
 

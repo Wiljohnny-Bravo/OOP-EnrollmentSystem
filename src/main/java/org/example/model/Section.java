@@ -1,8 +1,13 @@
 package org.example.model;
 
+import java.util.ArrayList;
+
 public class Section {
     private int sectionID;
     private String sectionName;
+    private int maxCapacity = 35;
+    private ArrayList<Student> enrolledStudents;
+    private Instructor instructor;
 
     public Section(){
         this(0);

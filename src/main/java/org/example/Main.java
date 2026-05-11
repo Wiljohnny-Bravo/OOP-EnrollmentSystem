@@ -2,16 +2,16 @@ package org.example;
 import org.example.model.Course;
 import org.example.model.Instructor;
 import org.example.model.Student;
-import org.example.service.CourseRegistrationImpl;
+import org.example.service.ICourseServiceImpl;
 import org.example.service.Registrar;
-import org.example.service.StudentRegistrationImpl;
+import org.example.service.IStudentServiceImpl;
 
 import java.util.Scanner;
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
-    static StudentRegistrationImpl studentRegistration = new StudentRegistrationImpl();
-    static CourseRegistrationImpl courseRegistration = new CourseRegistrationImpl();
+    static IStudentServiceImpl studentRegistration = new IStudentServiceImpl();
+    static ICourseServiceImpl courseRegistration = new ICourseServiceImpl();
     static Registrar registrar = new Registrar(studentRegistration, courseRegistration);
 
     static Scanner sc = new Scanner(System.in);

@@ -10,7 +10,7 @@ import static org.mockito.Mockito.verify;
 
 class RegistrarTest {
     @Mock
-    StudentRegistration studentRegistration;
+    IStudentService IStudentService;
 
     @InjectMocks
     Registrar registrar;
@@ -22,7 +22,7 @@ class RegistrarTest {
 
         assertEquals("Success", result);
 
-        verify(studentRegistration).saveStudent(s1);
+        verify(IStudentService).addStudent(s1);
 
     }
 }

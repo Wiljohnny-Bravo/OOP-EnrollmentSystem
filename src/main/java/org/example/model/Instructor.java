@@ -3,6 +3,7 @@ package org.example.model;
 public class Instructor extends Person{
 //    private ArrayList<Course> course = new ArrayList<>();
     private String course;
+    private String section;
 
     public Instructor(){
         this(0);
@@ -17,6 +18,15 @@ public class Instructor extends Person{
         super(id, name);
         this.course = course;
     }
+
+    public void setSection(String section){
+        this.section = section;
+    }
+
+    public Section getSection(){
+        return section;
+    }
+
     @Override
     public void mainTask() {
         System.out.println("Main Task: Teach");
