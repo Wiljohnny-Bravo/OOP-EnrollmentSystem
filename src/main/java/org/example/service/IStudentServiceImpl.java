@@ -41,7 +41,7 @@ public class IStudentServiceImpl implements IStudentService {
         }
     }
 
-    //REMOVE
+    //DELETE
     @Override
     public String removeStudent(Student student){
         for(int i = 0; i < studentList.size(); i++){
@@ -51,5 +51,9 @@ public class IStudentServiceImpl implements IStudentService {
             }
         }
         return "Error Found.";
+    }
+
+    public ArrayList<Student> getStudentList() {
+        return this.studentList;
     }
 }

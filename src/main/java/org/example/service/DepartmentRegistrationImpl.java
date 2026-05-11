@@ -63,6 +63,11 @@ public class DepartmentRegistrationImpl implements DepartmentRegistration{
         return "Error: Department ID not found.";
     }
 
+    @Override
+    public ArrayList<Department> getDepartmentList(){
+        return departmentList;
+    }
+
 //    CREATE
 //    @Override
 //    public void saveDepartment(Department department){

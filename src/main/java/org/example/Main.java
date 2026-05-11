@@ -1,18 +1,21 @@
 package org.example;
 import org.example.model.Course;
 import org.example.model.Instructor;
+import org.example.model.Section;
 import org.example.model.Student;
-import org.example.service.ICourseServiceImpl;
-import org.example.service.Registrar;
-import org.example.service.IStudentServiceImpl;
+import org.example.service.*;
 
 import java.util.Scanner;
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
-    static IStudentServiceImpl studentRegistration = new IStudentServiceImpl();
-    static ICourseServiceImpl courseRegistration = new ICourseServiceImpl();
-    static Registrar registrar = new Registrar(studentRegistration, courseRegistration);
+    static IStudentServiceImpl studentReg = new IStudentServiceImpl();
+    static ICourseServiceImpl courseReg = new ICourseServiceImpl();
+    static IInstructorServiceImpl instructorReg = new IInstructorServiceImpl();
+    static DepartmentRegistrationImpl deptReg = new DepartmentRegistrationImpl();
+    static IEnrollmentService enrollService = new IEnrollmentServiceImpl();
+
+    static Registrar registrar = new Registrar(studentReg, courseReg, instructorReg, deptReg, enrollService);
 
     static Scanner sc = new Scanner(System.in);
     public static void main(String[] args) {
@@ -36,17 +39,21 @@ public class Main {
                     courseSwitch();
                     break;
                 case 3:
+                    enrollmentSwitch();
+                    break;
+                case 4:
                     System.out.println("Exiting.....");
                     break;
             }
-        }while(choice != 3);
+        }while(choice != 4);
     }
 
     public static void displayChoice(){
         System.out.print("===========================================================================================" +
                 "\n[1] Student" +
                 "\n[2] Course" +
-                "\n[3] Exit" +
+                "\n[3] Enrollment" +
+                "\n[4] Exit" +
                 "\nEnter choice: ");
     }
 
@@ -103,6 +110,35 @@ public class Main {
         }while(choice != 5);
     }
 
+    public static void enrollmentSwitch(){
+        System.out.print("===========================================================================================" +
+        "\n[1] Enroll Student in Section" +
+        "\n[2] View University Hierarchy" +
+        "\nChoice: ");
+        int enrollChoice = sc.nextInt();
+        sc.nextLine();
+        if(enrollChoice == 1){
+            System.out.print("Enter Student ID: ");
+            int enrollStuID = sc.nextInt();
+            sc.nextLine();
+
+            System.out.print("Enter Section ID: ");
+            int enrollSecID = sc.nextInt();
+            sc.nextLine();
+
+            System.out.print("Enter Section Name: ");
+            String enrollSecName = sc.nextLine();
+
+            Student stuToEnroll = new Student(enrollStuID);
+            Section secToEnroll = new Section(enrollSecID, enrollSecName);
+
+            registrar.enrollStudent(stuToEnroll, secToEnroll);
+        } else if (enrollChoice == 2) {
+            registrar.showHierarchy(deptReg.getDepartmentList());
+        }
+
+    }
+
     public static void displayStudentCommands(){
         System.out.print("===========================================================================================" +
                 "\n[1] Save Student" +
@@ -112,6 +148,7 @@ public class Main {
                 "\n[5] Exit" +
                 "\nEnter Command: ");
     }
+
     public static void displayCourseCommands(){
         System.out.print("===========================================================================================" +
                 "\n[1] Save Course" +
@@ -121,7 +158,6 @@ public class Main {
                 "\n[5] Exit" +
                 "\nEnter Command: ");
     }
-
 
     public static void saveStudent(){
         System.out.println("===========================================================================================");
@@ -178,7 +214,7 @@ public class Main {
 
     public static void updateCourse(){
         System.out.println("===========================================================================================");
-        System.out.print("Enter Student ID to update: ");
+        System.out.print("Enter Course ID to update: ");
         int updateCourseID = sc.nextInt();
         registrar.updateCourse(new Course(updateCourseID));
         System.out.println("===========================================================================================");
@@ -186,7 +222,7 @@ public class Main {
 
     public static void removeCourse(){
         System.out.println("===========================================================================================");
-        System.out.print("Enter Student ID to update: ");
+        System.out.print("Enter Course ID to update: ");
         int removeCourseID = sc.nextInt();
         registrar.updateCourse(new Course(removeCourseID));
         System.out.println("===========================================================================================");
