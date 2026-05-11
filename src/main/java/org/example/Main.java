@@ -14,8 +14,10 @@ public class Main {
     static IInstructorServiceImpl instructorReg = new IInstructorServiceImpl();
     static DepartmentRegistrationImpl deptReg = new DepartmentRegistrationImpl();
     static IEnrollmentService enrollService = new IEnrollmentServiceImpl();
+    static TuitionService tuitionService = new TuitionFeePayment();
 
-    static Registrar registrar = new Registrar(studentReg, courseReg, instructorReg, deptReg, enrollService);
+    static Registrar registrar = new Registrar(studentReg, courseReg, instructorReg, deptReg, enrollService,
+            tuitionService);
 
     static Scanner sc = new Scanner(System.in);
     public static void main(String[] args) {
@@ -30,7 +32,8 @@ public class Main {
             displayChoice();
             choice = sc.nextInt();
             sc.nextLine();
-            System.out.println("===========================================================================================");
+            System.out.println("=====================================================================================" +
+                    "======");
             switch (choice){
                 case 1:
                     studentSwitch();
@@ -39,13 +42,18 @@ public class Main {
                     courseSwitch();
                     break;
                 case 3:
+                    instructorSwitch();
+                case 4:
                     enrollStuToSec();
                     break;
-                case 4:
+                case 5:
                     assignInstToSec();
                     break;
-                case 5:
+                case 6:
                     viewHierarchy();
+                    break;
+                case 7:
+                    tuitionSwitch();
                     break;
                 case 0:
                     System.out.println("Exiting.....");
@@ -58,9 +66,11 @@ public class Main {
         System.out.print("===========================================================================================" +
                 "\n[1] Student Management" +
                 "\n[2] Course Management" +
-                "\n[3] Enroll Student to Section" +
-                "\n[4] Assign Instructor to Section" +
-                "\n[5] View University Hierarchy" +
+                "\n[3] Instructor Management" +
+                "\n[4] Enroll Student to Section" +
+                "\n[5] Assign Instructor to Section" +
+                "\n[6] View University Hierarchy" +
+                "\n[7] Tuition Fee Management" +
                 "\n[0] Exit" +
                 "\nEnter choice: ");
     }
@@ -118,6 +128,45 @@ public class Main {
         }while(choice != 7);
     }
 
+    public static void instructorSwitch() {
+        System.out.println("--- Instructor Management ---");
+        System.out.println("[1] Add Instructor\n[2] View All Instructors\n[3] Update Instructor\n[4] Remove Instructor");
+        System.out.print("Enter choice: ");
+        int choice = sc.nextInt();
+        sc.nextLine();
+
+        switch(choice) {
+            case 1 -> {
+                System.out.print("Enter Instructor ID: ");
+                int id = sc.nextInt();
+                sc.nextLine();
+                System.out.print("Enter Name: ");
+                String name = sc.nextLine();
+                registrar.saveInstructor(new Instructor(id, name));
+                System.out.println("Instructor saved successfully.");
+            }
+            case 2 -> {
+                System.out.println("Listing All Instructors:");
+                registrar.displayAllInstructors();
+            }
+            case 3 -> {
+                System.out.print("Enter Instructor ID to update: ");
+                int id = sc.nextInt();
+                sc.nextLine();
+                // This calls the service logic which will then ask for new name/program
+                registrar.updateInstructor(new Instructor(id));
+            }
+            case 4 -> {
+                System.out.print("Enter Instructor ID to remove: ");
+                int id = sc.nextInt();
+                sc.nextLine();
+                String result = registrar.removeInstructor(new Instructor(id));
+                System.out.println(result);
+            }
+            default -> System.out.println("Invalid Choice.");
+        }
+    }
+
     public static void enrollStuToSec(){
             System.out.print("Enter Student ID: ");
             int enrollStuID = sc.nextInt();
@@ -136,6 +185,29 @@ public class Main {
             registrar.enrollStudent(stuToEnroll, secToEnroll);
     }
 
+    public static void tuitionSwitch() {
+        System.out.println("--- Tuition Management ---");
+        System.out.print("Enter Number of Units: ");
+        int units = sc.nextInt();
+        System.out.print("Enter Discount Rate (e.g., 0.10 for 10%): ");
+        double discount = sc.nextDouble();
+
+        double total = tuitionService.calculateTuitionFee(units, discount);
+        System.out.println("Total Tuition: PHP " + total);
+
+        System.out.print("Enter Payment Amount: ");
+        double payment = sc.nextDouble();
+        double remaining = tuitionService.processPayment(total, payment);
+
+        System.out.println("Payment Processed.");
+        System.out.println("Remaining Balance: PHP " + remaining);
+        if (remaining <= 0) {
+            System.out.println("Status: FULLY PAID");
+        } else {
+            System.out.println("Status: PARTIALLY PAID");
+        }
+    }
+    
     public static void assignInstToSec() {
         System.out.println("==================== ASSIGN INSTRUCTOR TO SECTION ====================");
         System.out.print("Enter Instructor ID: ");

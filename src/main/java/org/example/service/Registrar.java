@@ -10,14 +10,17 @@ public class Registrar {
     private IInstructorService instructorServ;
     private DepartmentRegistration departmentServ;
     private IEnrollmentService enrollmentServ;
+    private TuitionService tuitionServ;
 
     public Registrar(IStudentService studentServ, ICourseService courseServ, IInstructorService instructorServ,
-                     DepartmentRegistration departmentServ, IEnrollmentService enrollmentServ){
+                     DepartmentRegistration departmentServ, IEnrollmentService enrollmentServ,
+                     TuitionService tuitionServ){
         this.studentServ = studentServ;
         this.courseServ = courseServ;
         this.instructorServ = instructorServ;
         this.departmentServ = departmentServ;
         this.enrollmentServ = enrollmentServ;
+        this.tuitionServ = tuitionServ;
     }
     public void enrollStudent(Student student, Section section){
         enrollmentServ.enrollStudentInSection(student, section);
@@ -35,6 +38,29 @@ public class Registrar {
         departmentServ.addDepartment(department);
         return "Success";
     }
+
+    public void saveInstructor(Instructor instructor) {
+        instructorServ.addInstructor(instructor);
+    }
+
+    public void displayAllInstructors() {
+        List<Instructor> instructors = instructorServ.getAllInstructors();
+        if (instructors.isEmpty()) {
+            System.out.println("No instructors found.");
+        } else {
+            instructors.forEach(System.out::println);
+        }
+    }
+
+    public void updateInstructor(Instructor instructor) {
+        instructorServ.updateInstructor(instructor);
+    }
+
+    public String removeInstructor(Instructor instructor) {
+        instructorServ.removeInstructor(instructor);
+        return null;
+    }
+
     public String saveCourse(Course course){
         courseServ.addCourse(course);
         return "Success";

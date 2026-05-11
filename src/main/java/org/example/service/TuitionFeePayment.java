@@ -5,16 +5,18 @@ public class TuitionFeePayment implements TuitionService{
     private double balance;
     private double totalTuition;
 
-    public double calculateTuitionFee(int units, double discountRate){
-        totalTuition =  units * PRICE_PER_UNIT;
-
-        if(discountRate != 0){
-            totalTuition = totalTuition - (totalTuition * discountRate);
-        }
-        return totalTuition;
+    @Override
+    public double calculateTuitionFee(int units, double discountRate) {
+        double total = units * PRICE_PER_UNIT;
+        return total - (total * discountRate);
     }
-    public void makePayment(double amount){
-        balance = totalTuition - amount;
+    @Override
+    public double processPayment(double currentBalance, double paymentAmount) {
+        return currentBalance - paymentAmount;
+    }
+    @Override
+    public void makePayment(double amount) {
+        this.balance -= amount;
     }
     public double getRemainingBalance(){
         return balance;
