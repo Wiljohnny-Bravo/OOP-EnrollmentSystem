@@ -1,7 +1,5 @@
 package org.example.model;
 
-import java.util.ArrayList;
-
 public class Student extends Person{
     private String program;
     private Section section;
@@ -51,8 +49,8 @@ public class Student extends Person{
     @Override
     public String toString()     {
         return "STUDENT:" +
-                "Student ID: " + super.getID() + " || " +
-                "Student Name: " + super.getPersonName() + " || " +
-                "Program: " + program + "\n ";
+                "Student ID: " + getID() + " || " +
+                "Student Name: " + getPersonName() + " || " +
+                "Program: " + getProgram() + "\n ";
     }
 }

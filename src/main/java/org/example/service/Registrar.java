@@ -1,9 +1,6 @@
 package org.example.service;
 
-import org.example.model.Course;
-import org.example.model.Department;
-import org.example.model.Section;
-import org.example.model.Student;
+import org.example.model.*;
 
 import java.util.List;
 
@@ -28,6 +25,10 @@ public class Registrar {
 
     public void showHierarchy(List<Department> department){
         enrollmentServ.viewDepartmentHierarchy(department);
+    }
+
+    public void assignInstructorToSection(Instructor instructor, Section section) {
+        instructorServ.assignToSection(instructor, section);
     }
 
     public String saveDepartment(Department department){

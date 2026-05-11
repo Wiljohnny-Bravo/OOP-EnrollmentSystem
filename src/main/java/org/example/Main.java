@@ -39,21 +39,29 @@ public class Main {
                     courseSwitch();
                     break;
                 case 3:
-                    enrollmentSwitch();
+                    enrollStuToSec();
                     break;
                 case 4:
+                    assignInstToSec();
+                    break;
+                case 5:
+                    viewHierarchy();
+                    break;
+                case 0:
                     System.out.println("Exiting.....");
                     break;
             }
-        }while(choice != 4);
+        }while(choice != 0);
     }
 
     public static void displayChoice(){
         System.out.print("===========================================================================================" +
-                "\n[1] Student" +
-                "\n[2] Course" +
-                "\n[3] Enrollment" +
-                "\n[4] Exit" +
+                "\n[1] Student Management" +
+                "\n[2] Course Management" +
+                "\n[3] Enroll Student to Section" +
+                "\n[4] Assign Instructor to Section" +
+                "\n[5] View University Hierarchy" +
+                "\n[0] Exit" +
                 "\nEnter choice: ");
     }
 
@@ -107,17 +115,10 @@ public class Main {
                 case 5:
                     break;
             }
-        }while(choice != 5);
+        }while(choice != 7);
     }
 
-    public static void enrollmentSwitch(){
-        System.out.print("===========================================================================================" +
-        "\n[1] Enroll Student in Section" +
-        "\n[2] View University Hierarchy" +
-        "\nChoice: ");
-        int enrollChoice = sc.nextInt();
-        sc.nextLine();
-        if(enrollChoice == 1){
+    public static void enrollStuToSec(){
             System.out.print("Enter Student ID: ");
             int enrollStuID = sc.nextInt();
             sc.nextLine();
@@ -133,10 +134,32 @@ public class Main {
             Section secToEnroll = new Section(enrollSecID, enrollSecName);
 
             registrar.enrollStudent(stuToEnroll, secToEnroll);
-        } else if (enrollChoice == 2) {
-            registrar.showHierarchy(deptReg.getDepartmentList());
-        }
+    }
 
+    public static void assignInstToSec() {
+        System.out.println("==================== ASSIGN INSTRUCTOR TO SECTION ====================");
+        System.out.print("Enter Instructor ID: ");
+        int instID = sc.nextInt();
+        sc.nextLine(); // Consume newline
+
+        System.out.print("Enter Section ID: ");
+        int secID = sc.nextInt();
+        sc.nextLine();
+
+        System.out.print("Enter Section Name: ");
+        String secName = sc.nextLine();
+
+        // 1. Create temporary objects with the provided IDs
+        Instructor inst = new Instructor(instID);
+        Section sec = new Section(secID, secName);
+
+        // 2. Call the new wrapper method in Registrar
+        registrar.assignInstructorToSection(inst, sec);
+        System.out.println("======================================================================");
+    }
+
+    public static void viewHierarchy(){
+        registrar.showHierarchy(deptReg.getDepartmentList());
     }
 
     public static void displayStudentCommands(){
@@ -216,6 +239,8 @@ public class Main {
         System.out.println("===========================================================================================");
         System.out.print("Enter Course ID to update: ");
         int updateCourseID = sc.nextInt();
+        sc.nextLine();
+
         registrar.updateCourse(new Course(updateCourseID));
         System.out.println("===========================================================================================");
     }
@@ -224,6 +249,8 @@ public class Main {
         System.out.println("===========================================================================================");
         System.out.print("Enter Course ID to update: ");
         int removeCourseID = sc.nextInt();
+        sc.nextLine();
+
         registrar.updateCourse(new Course(removeCourseID));
         System.out.println("===========================================================================================");
     }

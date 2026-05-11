@@ -19,6 +19,14 @@ public class Instructor extends Person{
         this.course = course;
     }
 
+    public String getCourse() {
+        return course;
+    }
+
+    public void setCourse(String course) {
+        this.course = course;
+    }
+
     public void setSection(Section section){
         this.section = section;
     }
@@ -31,11 +39,12 @@ public class Instructor extends Person{
     public void mainTask() {
         System.out.println("Main Task: Teach");
     }
+
+    @Override
     public String toString() {
-        return "INSTRUCTOR:" +
-                "Instructor ID: " + super.getID() + " || " +
-                "Instructor Name: " + super.getPersonName() + " || " +
-                "Course: " + course + "\n ";
+        String sectionInfo = (section != null) ? section.getSectionName() : "None";
+        return String.format("Instructor [ID: %d | Name: %-20s | Course: %-15s | Section: %s]",
+                getID(), getPersonName(), course, sectionInfo);
     }
 
 }
