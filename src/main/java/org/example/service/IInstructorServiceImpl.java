@@ -2,6 +2,7 @@ package org.example.service;
 
 import org.example.model.Instructor;
 import org.example.model.Section;
+import org.example.model.Student;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,8 +15,39 @@ public class IInstructorServiceImpl implements IInstructorService {
     //CREATE
     @Override
     public void addInstructor(Instructor instructor) {
-        System.out.println("Enter student: ");
+        System.out.println("Enter instructor: ");
         instructorList.add(instructor);
+    }
+
+    //UPDATE
+    @Override
+    public void updateInstructor(Instructor instructor){
+        for (int i = 0; i < instructorList.size(); i++){
+            if(instructorList.get(i).getID() == (instructor.getID())){
+                System.out.print("Enter name: ");
+                String name = sc.nextLine();
+
+                System.out.print("Enter program: ");
+                String program = sc.nextLine();
+
+                instructorList.set(i, instructor);
+
+                instructorList.set(i, new Instructor(instructor.getID(), name, program));
+                break;
+            }
+        }
+    }
+
+    //DELETE
+    @Override
+    public String removeInstructor(Instructor instructor){
+        for(int i = 0; i < instructorList.size(); i++){
+            if(instructorList.get(i).getID() == (instructor.getID())){
+                instructorList.remove(i);
+                return "Deleted Successfully";
+            }
+        }
+        return "Error Found.";
     }
 
     @Override
