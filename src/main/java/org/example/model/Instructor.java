@@ -3,7 +3,7 @@ package org.example.model;
 public class Instructor extends Person{
 //    private ArrayList<Course> course = new ArrayList<>();
     private String course;
-    private String section;
+    private Section section;
 
     public Instructor(){
         this(0);
@@ -19,7 +19,7 @@ public class Instructor extends Person{
         this.course = course;
     }
 
-    public void setSection(String section){
+    public void setSection(Section section){
         this.section = section;
     }
 

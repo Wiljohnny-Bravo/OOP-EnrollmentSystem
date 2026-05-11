@@ -19,15 +19,29 @@ public class IInstructorServiceImpl implements IInstructorService {
 
     @Override
     public void assignToSection(Instructor instructor, Section section) {
+        boolean found = false;
         for(int i = 0; i < instructorList.size(); i++){
             if(instructorList.get(i).getID() == instructor.getID()){
-                instructorList.get()
+                instructorList.get(i).setSection(section);
             }
+            System.out.println("Instructor " + instructorList.get(i).getPersonName() +
+                    " ahs been assigned to Section: " + section.getSectionName());
+            found = true;
+            break;
+        }
+        if(!found){
+            System.out.println("Error: Instructor ID " + instructor.getID() + " not found.");
         }
     }
 
     @Override
     public void getInstructorDetails(Instructor instructor) {
-
+        for (Instructor i : instructorList) {
+            if (i.getID() == instructor.getID()) {
+                System.out.println(i.toString());
+                return;
+            }
+        }
+        System.out.println("Instructor not found.");
     }
 }
