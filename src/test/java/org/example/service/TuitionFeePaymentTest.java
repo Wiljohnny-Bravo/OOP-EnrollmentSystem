@@ -1,6 +1,5 @@
-package org.example.model;
+package org.example.service;
 
-import org.example.service.TuitionFeePayment;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
@@ -14,6 +13,7 @@ class TuitionFeePaymentTest {
      void setup(){
         tuitionFeePayment = new TuitionFeePayment();
     }
+
     @Test
     @DisplayName("Calculation of Tuition Fee")
     void shouldReturnCorrectCalculationOfTuitionFee(){
@@ -23,6 +23,7 @@ class TuitionFeePaymentTest {
         //Assert
         assertEquals(3000, tuitionFeePayment.calculateTuitionFee(3,0));
     }
+
     @Test
     void shouldReturnCurrentCalculationOfTuitionFeeWithTenPercentDiscount(){
         //Act
@@ -44,6 +45,7 @@ class TuitionFeePaymentTest {
     }
     @Test
     void shouldCheckIfTuitionFeeIsNotFullyPaid(){
+        tuitionFeePayment.calculateTuitionFee(3, 0);
         //Act
         tuitionFeePayment.makePayment(1000);
 
@@ -54,6 +56,7 @@ class TuitionFeePaymentTest {
     void shouldCheckIFTuitionFeeIsFullyPaid(){
         //Act
         tuitionFeePayment.calculateTuitionFee(3, .10);
+        tuitionFeePayment.makePayment(2700);
 
         //Assert
         assertTrue(tuitionFeePayment.isFullyPaid());

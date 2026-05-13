@@ -8,6 +8,7 @@ public class TuitionFeePayment implements TuitionService{
     @Override
     public double calculateTuitionFee(int units, double discountRate) {
         double total = units * PRICE_PER_UNIT;
+        this.balance = total - (total * discountRate);
         return total - (total * discountRate);
     }
     @Override
@@ -21,7 +22,8 @@ public class TuitionFeePayment implements TuitionService{
     public double getRemainingBalance(){
         return balance;
     }
-    public boolean isFullyPaid(){
-        return balance == 0 ? true : false;
+    @Override
+    public boolean isFullyPaid() {
+        return balance <= 0;
     }
 }

@@ -38,8 +38,9 @@ public class Registrar {
         departmentServ.addDepartment(department);
     }
 
-    public void saveStudent(Student student) {
+    public String saveStudent(Student student) {
         studentServ.addStudent(student);
+        return null;
     }
 
     public void saveInstructor(Instructor instructor) {
