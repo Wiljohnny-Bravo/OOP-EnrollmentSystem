@@ -1,5 +1,4 @@
 package org.example.service;
-
 import org.example.model.Course;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -9,9 +8,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 class ICourseServiceImplTest {
-
     private ICourseServiceImpl courseService;
-
     @BeforeEach
     void setup() {
         courseService = new ICourseServiceImpl();
